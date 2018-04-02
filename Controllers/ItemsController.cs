@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Vue2Spa.Data;
@@ -10,30 +11,33 @@ namespace Vue2Spa.Controllers
     [Route("api/[controller]")]
     public class ItemsController : BaseController
     {
+        private readonly ApplicationDbContext _context;
         private ItemsManager manager;
-        public ItemsController(IConfiguration config) : base(config)
+        public ItemsController(IConfiguration config, ApplicationDbContext context) : base(config)
         {
+            _context = context;
             manager = new ItemsManager(configuration);
         }
         // GET: api/Items
         [HttpGet]
         public List<Items> Get()
         {
-            return manager.GetAll();
+            return _context.Items.ToList();
         }
 
         // GET: api/Items/5
         [HttpGet("{id}", Name = "Get")]
         public Items Get(int id)
         {
-            return manager.GetById(id);
+            return _context.Items.Find(id);
         }
 
         // POST: api/Items
         [HttpPost]
         public Items Post([FromBody]Items value)
         {
-            manager.AddItem(value);
+            _context.Items.Add(value);
+            _context.SaveChanges();
             return value;
         }
 
@@ -41,7 +45,8 @@ namespace Vue2Spa.Controllers
         [HttpPut]
         public Items Put([FromBody]Items value)
         {
-            manager.UpdateItem(value);
+            _context.Items.Update(value);
+            _context.SaveChanges();
             return value;
         }
 
@@ -49,7 +54,8 @@ namespace Vue2Spa.Controllers
         [HttpDelete("{id}")]
         public int Delete(int id)
         {
-            manager.DeleteItem(new Items{Id = id});
+            _context.Items.Remove(_context.Items.Find(id));
+            _context.SaveChanges();
             return id;
         }
     }
