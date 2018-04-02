@@ -61,7 +61,15 @@
                 });
             },
             Register: function () {
-                alert(`${this.registration.email}/${this.registration.password}`);
+
+                var loginCredentialsViewModel = { email: this.registration.email, password: this.registration.password };
+
+                this.$http.post('https://localhost:44335/api/account', loginCredentialsViewModel).then(result => {
+                    alert('ok' + JSON.stringify(result));
+                }).catch(function (error) {
+                    alert('error' + JSON.stringify(error));
+                });
+
             },
             CallAuthAPI: function () {
                 alert(this.IsLoggedIn)

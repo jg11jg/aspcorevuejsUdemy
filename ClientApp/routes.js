@@ -22,9 +22,13 @@ import StoreUpdate from 'components/Store/Update'
 import StoreDelete from 'components/Store/Delete'
 import AuthOrig from 'components/Auth/Auth.Orig'
 import Auth from 'components/Auth/Auth'
+import Profile from 'components/Profile'
+import Expenses from 'components/Expenses'
 
 export const routes = [
     { path: '/Auth/Auth', component: Auth, display: 'Register/Login', style: 'glyphicon glyphicon-duplicate' },
+    { path: '/Expenses', component: Expenses, display: 'Expenses', style: 'glyphicon glyphicon-th-list' },
+    { path: '/Profile', component: Profile, display: 'Profile', style: 'glyphicon glyphicon-education' },
     { path: '/', component: HomePage, display: 'Home', style: 'glyphicon glyphicon-home' },
     { path: '/counter', component: CounterExample, display: 'Counter', style: 'glyphicon glyphicon-education' },
     { path: '/fetch-data', component: FetchData, display: 'Fetch data', style: 'glyphicon glyphicon-th-list' },
