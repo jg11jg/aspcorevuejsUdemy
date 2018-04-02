@@ -13,9 +13,11 @@ export const store = new Vuex.Store({
     getters: {
         getCount: state => {
             return state.count;
-        }
+        },
     },
     actions: {
         increment: ({ commit }) => commit('increment')
-    }
+    },
+    hostname: "asdf"
+
 });

@@ -51,13 +51,19 @@
         },
         methods: {
             Login: function () {
-                this.$http.post('/api/Users/Login', { email: this.login.email, password: this.login.password }).then(result => {
-                    this.token = result.data;
-                    this.IsLoggedIn = true
-                    alert(`You are authenticated, token:${this.token}`);
+                this.$http.post('https://localhost:44335/api/auth/login', { email: this.login.email, password: this.login.password }).then(result => {
+                    this.token = result.data.auth_token;
+                    localStorage.setItem('token', result.data.auth_token);
+                    localStorage.setItem('userId', result.data.id);
+                    //alert(JSON.stringify(this.token))
+                    //alert(localStorage.getItem('token'))
+                    var authHeader = 'Bearer ' + localStorage.getItem('token');
+                    axios.defaults.headers.common['Authorization'] = authHeader;
+                    this.IsLoggedIn = true;
+                    //alert(`You are authenticated, token:${this.token}`);
 
                 }).catch(function(error) {
-                    alert("You are an Unauthorized user");
+                    alert('error' + JSON.stringify(error.response.data));
                 });
             },
             Register: function () {
@@ -65,9 +71,9 @@
                 var loginCredentialsViewModel = { email: this.registration.email, password: this.registration.password };
 
                 this.$http.post('https://localhost:44335/api/account', loginCredentialsViewModel).then(result => {
-                    alert('ok' + JSON.stringify(result));
+                    alert('Account created.  Please login.');
                 }).catch(function (error) {
-                    alert('error' + JSON.stringify(error));
+                    alert('error' + JSON.stringify(error.response.data));
                 });
 
             },

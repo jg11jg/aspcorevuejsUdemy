@@ -3,7 +3,7 @@
         <h1>Profile</h1>
         <h4>Role: {{role}}</h4>
         <h2>Profile Image</h2>
-        <img src="https://twitter.com/JohnGibbonsNmbk/profile_image?size=original" height="300px">
+        <img v-bind:src="getImageSource()" height="300px">
         <h2>Choose New</h2>
         <div>
             <div class="file-upload-form">
@@ -20,11 +20,13 @@
 </template>
 
 <script>
+
     export default {
         data() {
             return {
                 imageData: "",
-                role : "user"
+                role: "user",
+                imageSource: "https://localhost:44335/api/profile-images"
             }
         },
         methods: {
@@ -47,6 +49,9 @@
             },
             uploadImage: function (event) {
                 alert("uploading")
+            },
+            getImageSource: function () {
+                return "https://localhost:44335/api/profile-images/" + localStorage.getItem("userId");
             }
 
         }
