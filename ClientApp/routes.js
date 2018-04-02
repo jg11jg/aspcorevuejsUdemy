@@ -20,9 +20,11 @@ import StoreHome from 'components/Store/Home'
 import StoreAdd from 'components/Store/Add'
 import StoreUpdate from 'components/Store/Update'
 import StoreDelete from 'components/Store/Delete'
+import AuthOrig from 'components/Auth/Auth.Orig'
 import Auth from 'components/Auth/Auth'
 
 export const routes = [
+    { path: '/Auth/Auth', component: Auth, display: 'Register/Login', style: 'glyphicon glyphicon-duplicate' },
     { path: '/', component: HomePage, display: 'Home', style: 'glyphicon glyphicon-home' },
     { path: '/counter', component: CounterExample, display: 'Counter', style: 'glyphicon glyphicon-education' },
     { path: '/fetch-data', component: FetchData, display: 'Fetch data', style: 'glyphicon glyphicon-th-list' },
@@ -36,7 +38,7 @@ export const routes = [
     { path: '/Store/Add', component: StoreAdd, display: 'Store Add Item', style: 'glyphicon glyphicon-duplicate' },
     { path: '/Store/Update', component: StoreUpdate, display: 'Store Update Item', style: 'glyphicon glyphicon-duplicate' },
     { path: '/Store/Delete', component: StoreDelete, display: 'Store Delete Item', style: 'glyphicon glyphicon-duplicate' },
-    { path: '/Auth/Auth', component: Auth, display: 'Authentication', style: 'glyphicon glyphicon-duplicate' },
+    { path: '/Auth/AuthOrig', component: AuthOrig, display: 'AuthOrig', style: 'glyphicon glyphicon-duplicate' },
     {
         path: '/Routes',
         component: Routes,
